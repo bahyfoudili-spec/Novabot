@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة تحكم البوت</title>
+  <link rel="stylesheet" href="/public/style.css" />
+  <meta http-equiv="refresh" content="30" />
+</head>
+<body>
+  <div class="topbar">
+    <% if (stats.botAvatar) { %>
+      <img src="<%= stats.botAvatar %>" alt="avatar" />
+    <% } %>
+    <div>
+      <h1><%= stats.botTag %></h1>
+      <span>لوحة تحكم بسيطة — تُحدَّث تلقائياً كل 30 ثانية</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="value"><%= stats.guildCount %></div>
+        <div class="label">عدد السيرفرات</div>
+      </div>
+      <div class="stat-card">
+        <div class="value"><%= stats.userCount.toLocaleString('ar-EG') %></div>
+        <div class="label">إجمالي الأعضاء</div>
+      </div>
+      <div class="stat-card">
+        <div class="value"><%= stats.ping %>ms</div>
+        <div class="label">زمن الاستجابة (Ping)</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">
+          <%= Math.floor(stats.uptimeSeconds / 3600) %>س <%= Math.floor((stats.uptimeSeconds % 3600) / 60) %>د
+        </div>
+        <div class="label">مدة التشغيل</div>
+      </div>
+    </div>
+
+    <h2 class="section-title">السيرفرات</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>السيرفر</th>
+          <th>الأعضاء</th>
+          <th>تذاكر مفتوحة</th>
+          <th>إجمالي الإنذارات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% stats.guilds.forEach(g => { %>
+          <tr>
+            <td><%= g.name %></td>
+            <td><%= g.memberCount %></td>
+            <td>
+              <span class="badge <%= g.openTickets > 0 ? 'warning' : 'success' %>">
+                <%= g.openTickets %>
+              </span>
+            </td>
+            <td><%= g.totalWarnings %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <div class="footer-note">لوحة تحكم للعرض فقط — للتعديل على الإعدادات استخدم أوامر السلاش داخل ديسكورد.</div>
+  </div>
+</body>
+</html>
