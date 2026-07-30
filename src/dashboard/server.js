@@ -53,7 +53,7 @@ function startDashboard(client) {
   app.set('views', path.join(__dirname, 'views'));
   app.use('/public', express.static(path.join(__dirname, 'public')));
 
-  app.use(basicAuth);
+// app.use(basicAuth);
 
   app.get('/', (req, res) => {
     res.render('index', { stats: getStats(client) });
