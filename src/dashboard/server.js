@@ -47,7 +47,7 @@ function getStats(client) {
 
 function startDashboard(client) {
   const app = express();
-  const PORT = process.env.DASHBOARD_PORT || 3000;
+  const PORT = process.env.PORT || process.env.DASHBOARD_PORT || 3000;
 
   app.set('view engine', 'ejs');
   app.set('views', path.join(__dirname, 'views'));
